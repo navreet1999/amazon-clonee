@@ -2,6 +2,8 @@ Frontend>>>
 
 1. npm install react-router-dom <br/>
 2. npm install axios
+3. npm install use-reducer-logger --force (for debug) <br/>
+4.
 
 Backend>>>>
 
