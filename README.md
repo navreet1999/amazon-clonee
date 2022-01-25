@@ -1,4 +1,14 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend>>>
+
+1. npm install react-router-dom <br/>
+2. npm install axios
+
+Backend>>>>
+
+1. npm init <br/>
+2. npm install express <br/>
+3. npm install nodemon --save-dev <br/>
+4. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
