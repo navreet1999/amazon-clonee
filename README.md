@@ -5,7 +5,8 @@ Frontend>>>
 3. npm install use-reducer-logger --force (for debug) <br/>
 4. npm install react-bootstrap bootstrap@5.1.3<br/>
 5. npm install react-router-bootstrap<br/>
-6.
+6. npm install react-helemt-async(for showing the product name in the page title)<br/>
+7.
 
 Backend>>>>
 
