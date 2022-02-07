@@ -5,6 +5,8 @@ import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
+import { Store } from "./store";
 
 function App() {
   return (
