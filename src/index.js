@@ -5,11 +5,14 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { HelmetProvider } from "react-helmet-async";
+import { StoreProvider } from "./store";
 
 ReactDOM.render(
-  <HelmetProvider>
-    <App />
-  </HelmetProvider>,
+  <StoreProvider>
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
+  </StoreProvider>,
   document.getElementById("root")
 );
 
