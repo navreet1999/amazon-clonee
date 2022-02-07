@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useReducer } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import { Badge, Col, ListGroup, Row, Card, Button } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Rating from "../components/Rating";
+import { Store } from "../store";
 import { getError } from "../utils";
 
 const reducer = (state, action) => {
@@ -41,6 +42,25 @@ export default function ProductScreen() {
     };
     fetchData();
   }, [slug]); // when user switch b/w pages,the fetch data dispatch again and we get the new product from backend
+
+  // by using the use context we can access to the state of the context and change the context
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart } = state;
+  const addToCartHandler = async () => {
+    //Find the current product in the cart or not
+    const existItem = cart.cartItems.find((x) => x._id === product._id);
+    //if current product exist we increase the quantity by 1
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    if (data.countInStock < quantity) {
+      window.alert("sorry.Product is out of stock");
+      return;
+    }
+    ctxDispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...product, quantity: 1 },
+    });
+  };
 
   return loading ? (
     <LoadingBox />
