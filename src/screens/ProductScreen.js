@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useReducer } from "react";
+
 import {
   Badge,
   Col,
@@ -9,6 +10,7 @@ import {
   Button,
   CarouselItem,
 } from "react-bootstrap";
+
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
@@ -52,6 +54,7 @@ export default function ProductScreen() {
     fetchData();
   }, [slug]); // when user switch b/w pages,the fetch data dispatch again and we get the new product from backend
 
+
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart } = state;
   const addToCartHandler = async () => {
@@ -69,6 +72,7 @@ export default function ProductScreen() {
     });
     navigate("/cart");
   };
+
   return loading ? (
     <LoadingBox />
   ) : error ? (

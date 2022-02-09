@@ -1,12 +1,16 @@
 import React, { createContext, useReducer } from "react";
 
+// react context to save items i a global state and use it in components
+
 export const Store = createContext();
 
 const initialState = {
   cart: {
+
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
       : [],
+    
   },
 };
 
@@ -18,11 +22,13 @@ function reducer(state, action) {
         (item) => item._id === newItem._id
       );
 
+
       const cartItems = existItem
         ? state.cart.cartItems.map((item) =>
             item._id === existItem._id ? newItem : item
           )
         : [...state.cart.cartItems, newItem];
+
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return {
         ...state,
@@ -43,13 +49,16 @@ function reducer(state, action) {
           cartItems,
         },
       };
+
     }
+
     default:
       return state;
   }
-}
+
 //it is wrapper for our react application and pass global props to the children\
 //it is H.O.D function(higher order)
+
 export function StoreProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = { state, dispatch };
