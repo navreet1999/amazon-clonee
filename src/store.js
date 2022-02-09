@@ -6,11 +6,9 @@ export const Store = createContext();
 
 const initialState = {
   cart: {
-
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
       : [],
-    
   },
 };
 
@@ -21,7 +19,6 @@ function reducer(state, action) {
       const existItem = state.cart.cartItems.find(
         (item) => item._id === newItem._id
       );
-
 
       const cartItems = existItem
         ? state.cart.cartItems.map((item) =>
@@ -49,13 +46,12 @@ function reducer(state, action) {
           cartItems,
         },
       };
-
     }
 
     default:
       return state;
   }
-
+}
 //it is wrapper for our react application and pass global props to the children\
 //it is H.O.D function(higher order)
 
