@@ -1,11 +1,16 @@
 import React, { createContext, useReducer } from "react";
 
 // react context to save items i a global state and use it in components
+
 export const Store = createContext();
 
 const initialState = {
   cart: {
-    cartItems: [],
+
+    cartItems: localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : [],
+    
   },
 };
 
@@ -13,14 +18,18 @@ function reducer(state, action) {
   switch (action.type) {
     case "CART_ADD_ITEM":
       const newItem = action.payload;
-      const existItem = state.cartItems.find(
+      const existItem = state.cart.cartItems.find(
         (item) => item._id === newItem._id
       );
+
+
       const cartItems = existItem
         ? state.cart.cartItems.map((item) =>
             item._id === existItem._id ? newItem : item
           )
         : [...state.cart.cartItems, newItem];
+
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return {
         ...state,
         cart: {
@@ -28,11 +37,28 @@ function reducer(state, action) {
           cartItems,
         },
       };
+    case "CART_REMOVE_ITEM": {
+      const cartItems = state.cart.cartItems.filter(
+        (item) => item._id !== action.payload._id
+      );
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          cartItems,
+        },
+      };
+
+    }
+
     default:
       return state;
   }
-}
-//it is a wrapper for our react application and pass global props to children
+
+//it is wrapper for our react application and pass global props to the children\
+//it is H.O.D function(higher order)
+
 export function StoreProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = { state, dispatch };
