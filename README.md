@@ -13,7 +13,10 @@ Backend>>>>
 1. npm init <br/>
 2. npm install express <br/>
 3. npm install nodemon --save-dev <br/>
-4. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+4. npm install mongoose <br/>
+5. npm install dotenv
+
+   This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
